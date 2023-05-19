@@ -1,10 +1,12 @@
-#### Pre-Requisite:
-```sh
-sudo su -
-setenforce 0
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
-```
+#### Documentation Referred:
 
+https://etcd.io/docs/v3.5/op-guide/configuration/
+
+#### Pre-Requisite: Set SERVER-IP variable
+```sh
+SERVER_IP=139.59.28.67 (change this to your IP)
+echo $SERVER_IP
+```
 #### Step 1: Configure the Certificates:
 ```sh
 cd /root/certificates/
@@ -23,7 +25,7 @@ basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 [alt_names]
-IP.1 = SERVER-IP
+IP.1 = ${SERVER_IP}
 IP.2 = 127.0.0.1
 EOF
 ```
@@ -39,16 +41,12 @@ cp etcd.crt etcd.key ca.crt /etc/etcd
 ```
 #### Step 3: Copy the ETCD and ETCDCTL Binaries to the Path
 ```sh
-cd /root/binaries/kubernetes/server/bin/etcd-v3.4.10-linux-amd64/
+cd /root/binaries/kubernetes/server/bin/etcd-v3.5.4-linux-amd64/
 cp etcd etcdctl /usr/local/bin/
 ```
 
-#### Step 4: Configure the Systemd File
+#### Step 4: Configure the systemd File
 
-Add IP Address to Enviornement Variable of Server_IP.
-```sh
-SERVER_IP=YOUR-IP-ADDRESS-HERE
-```
 #### Create a service file:
 ```sh
 cat <<EOF | sudo tee /etc/systemd/system/etcd.service

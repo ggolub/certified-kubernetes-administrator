@@ -1,30 +1,38 @@
-# Domain - Networking
+# Domain - Services and Networking
 
-The code mentioned in this document are used in the Certified Kubernetes Administrator 2020 course.
+The code mentioned in this document are used in the Certified Kubernetes Administrator 2022 course.
 
-https://www.udemy.com/course/certified-kubernetes-administrator/?couponCode=CKA-SEP-20
+https://www.udemy.com/course/certified-kubernetes-administrator/?referralCode=700DA06BF8A30E27AC7E
 
 
 # Video-Document Mapper
 
 | Sr No | Document Link |
 | ------ | ------ |
-| 1 | [Creating our first Service and Endpoint][PlDa] |
-| 2 | [Service Type: NodePort][PlDb] |
-| 3 | [Service Type: Load Balancer][PlDc]
-| 4 | [Deploying our first Helm Chart][PlDd] |
-| 5 | [Named Based Virtual Hosting (Ingress)][PlDe] |
-| 6 | [Deploying Nginx Ingress Controller][PlDf] |
-| 7 | [Understanding Ingress Resource and Ingress Controllers][PlDg] |
-| 8 | [Configuring Default BackEnd for Ingresss][PlDh] |
+| 1 | [Creating Service and Endpoints][PlDa] |
+| 2 | [Using Selectors in Service][PlDb] |
+| 3 | [Service Type: NodePort][PlDc] |
+| 4 | [Service Type: Load Balancer][PlDd]
+| 5 | [Generating Service Manifest via CLI][PlDe]
+| 6 | [Installing Helm][PlDf] |
+| 7 | [Deploying our first Helm Chart][PlDg] |
+| 8 | [Creating Ingress Resource][PlDh] |
+| 9 | [Deploying  Ingress Controller][PlDi] |
+| 10 | [Kubernetes Namespace][PlDj] |
+| 11 | [Service Accounts][PlDk] |
+| 12 | [Named Port][PlDl] |
 
 
 
-   [PlDa]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/serviceandendpoints.md>
-   [PlDb]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/nodeport.yaml>
-   [PlDc]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/loadbalancer.yaml>
-  [PlDd]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/first-helm-chart.md>
-[PlDe]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/kplabs-ingress.yaml>
-   [PlDf]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/deploy-ingress-controller.txt>
-   [PlDg]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%202%20-%20Application%20LifeCycle%20Management/jobs.yaml>
-   [PlDh]: <https://github.com/zealvora/certified-kubernetes-administrator/blob/master/Domain%203%20-%20Services%20and%20Networking/kplabs-ingress-default-backend.yaml>
+[PlDa]: <./serviceandendpoints.md>
+[PlDb]: <./service-selector.md>
+[PlDc]: <./nodeport.md>
+[PlDd]: <./loadbalancer.md>
+[PlDe]: <./service-manifest-cli.md>
+[PlDf]: <./install-helm.md>      
+[PlDg]: <./first-helm-chart.md>
+[PlDh]: <./ingress.md>
+[PlDi]: <./deploy-ingress-controller.md>
+[PlDj]: <./namespace.md>
+[PlDk]: <./service-account.md>
+[PlDl]: <./named-port.md>

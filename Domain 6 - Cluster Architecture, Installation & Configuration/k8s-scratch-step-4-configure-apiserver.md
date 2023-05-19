@@ -1,15 +1,17 @@
 #### Reference Documentation mentioned in the video:
 
-https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/
-
 https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/
 
-#### Pre:Requisite Step: Move the kube-apiserver binary to /usr/bin directory.
+https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
+
+#### Pre:Requisite Step: Move the kube-apiserver binary to /usr/local/bin directory.
 
 ```sh
 cd /root/binaries/kubernetes/server/bin/
 cp kube-apiserver /usr/local/bin/
 ```
+
+Ensure that the SERVER_IP variable is still set.
 
 #### Step 1. Generate Configuration File for CSR Creation.
 ```sh
@@ -52,6 +54,7 @@ openssl x509 -req -in service-account.csr -CA ca.crt -CAkey ca.key -CAcreateseri
 ```sh
 mkdir /var/lib/kubernetes
 cp etcd.crt etcd.key ca.crt kube-api.key kube-api.crt service-account.crt service-account.key /var/lib/kubernetes
+ls /var/lib/kubernetes
 ```
 
 #### Step 5: Creating Encryption key and Configuration
@@ -88,7 +91,7 @@ Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
 ExecStart=/usr/local/bin/kube-apiserver \
---advertise-address=134.209.159.37 \
+--advertise-address=${SERVER_IP} \
 --allow-privileged=true \
 --authorization-mode=Node,RBAC \
 --client-ca-file=/var/lib/kubernetes/ca.crt \
@@ -98,10 +101,8 @@ ExecStart=/usr/local/bin/kube-apiserver \
 --etcd-certfile=/var/lib/kubernetes/etcd.crt \
 --etcd-keyfile=/var/lib/kubernetes/etcd.key \
 --etcd-servers=https://127.0.0.1:2379 \
---kubelet-certificate-authority=/var/lib/kubernetes/ca.crt \
 --kubelet-client-certificate=/var/lib/kubernetes/kube-api.crt \
 --kubelet-client-key=/var/lib/kubernetes/kube-api.key \
---kubelet-https=true \
 --service-account-key-file=/var/lib/kubernetes/service-account.crt \
 --service-cluster-ip-range=10.32.0.0/24 \
 --tls-cert-file=/var/lib/kubernetes/kube-api.crt \
@@ -114,6 +115,9 @@ ExecStart=/usr/local/bin/kube-apiserver \
 --audit-log-path=/var/log/kube-api-audit.log \
 --bind-address=0.0.0.0 \
 --event-ttl=1h \
+--service-account-key-file=/var/lib/kubernetes/service-account.crt \
+--service-account-signing-key-file=/var/lib/kubernetes/service-account.key \
+--service-account-issuer=https://${SERVER_IP}:6443 \
 --encryption-provider-config=/var/lib/kubernetes/encryption-at-rest.yaml \
 --v=2
 Restart=on-failure
